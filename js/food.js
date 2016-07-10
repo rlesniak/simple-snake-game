@@ -10,10 +10,20 @@ class Food extends Context {
     }
   }
 
+  generateRandomPoint(multiplier) {
+    let point = Math.round(Math.random() * multiplier)
+
+    if (point > this.rectSize) {
+      point -= this.rectSize
+    }
+
+    return Math.round(point / this.rectSize) * this.rectSize
+  }
+
   generate() {
     this.props.pos = {
-      x: Math.round(Math.round(Math.random() * this.ctxSize.w) / this.rectSize) * this.rectSize,
-      y: Math.round(Math.round(Math.random() * this.ctxSize.h) / this.rectSize) * this.rectSize,
+      x: this.generateRandomPoint(this.ctxSize.w),
+      y: this.generateRandomPoint(this.ctxSize.h),
     }
     this.setType()
   }
