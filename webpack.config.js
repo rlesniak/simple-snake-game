@@ -2,6 +2,7 @@
 var path = require('path')
 var LiveReloadPlugin = require('webpack-livereload-plugin')
 var webpack = require('webpack')
+var ExtractTextPlugin = require('extract-text-webpack-plugin')
 
 module.exports = {
   entry: './js/main',
@@ -28,12 +29,21 @@ module.exports = {
           presets: ['es2015'],
         },
       },
+      {
+        test: /\.scss$/,
+        loader: ExtractTextPlugin.extract(
+          'style',
+          'css!sass'
+        ),
+      },
     ],
   },
   plugins: [
     new webpack.ProvidePlugin({
       _: 'lodash',
+      $: 'jQuery',
     }),
     new LiveReloadPlugin(),
+    new ExtractTextPlugin('main.css'),
   ],
 }

@@ -6,6 +6,7 @@ parserOptions:
   sourceType: module
 globals:
   _: true
+  $: true
 rules:
   linebreak-style:
     - error

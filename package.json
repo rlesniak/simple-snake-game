@@ -4,6 +4,7 @@
   "description": "",
   "main": "bundle.js",
   "dependencies": {
+    "jquery": "^3.1.0",
     "lodash": "^4.13.1",
     "webpack": "^1.13.1"
   },
@@ -17,6 +18,10 @@
     "eslint-plugin-import": "^1.10.2",
     "eslint-plugin-jsx-a11y": "^1.5.5",
     "eslint-plugin-react": "^5.2.2",
+    "extract-text-webpack-plugin": "^1.0.1",
+    "node-sass": "^3.8.0",
+    "sass-loader": "^4.0.0",
+    "webpack": "^1.13.1",
     "webpack-livereload-plugin": "^0.8.1"
   },
   "scripts": {

@@ -1,6 +1,7 @@
 import Context from './context'
 import Snake from './snake'
 import Food from './food'
+import { gameOver } from './ui'
 
 class Game extends Context {
   constructor() {
@@ -16,6 +17,7 @@ class Game extends Context {
   }
 
   restart() {
+    gameOver().hide()
     clearInterval(this.interval)
 
     this.dir = 'r'
@@ -31,7 +33,7 @@ class Game extends Context {
 
     this.interval = setInterval(() => {
       if (this.isOver) {
-        this.restart()
+        gameOver().show()
         return
       }
       if (this.isPaused) {
@@ -68,8 +70,10 @@ class Game extends Context {
       this.dir = 'r'
     } else if (key === 40 && this.dir !== 'u') {
       this.dir = 'd'
-    } else if (key === 80) {
+    } else if (key === 80) { // p
       this.togglePause()
+    } else if (key === 82) { // r
+      this.restart()
     }
   }
 
