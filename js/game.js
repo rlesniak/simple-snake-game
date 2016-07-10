@@ -78,7 +78,7 @@ class Game extends Context {
   }
 
   isEaten() {
-    const foodPos = this.food.getPosition()
+    const foodPos = this.food.position
     return this.snake.checkPosition(foodPos.x, foodPos.y)
   }
 
@@ -89,7 +89,7 @@ class Game extends Context {
   }
 
   checkCollisionWithBody() {
-    const head = this.snake.getHead()
+    const head = this.snake.head
     const body = this.snake.getBody()
 
     const isCollision = !!body.slice(0, -1).filter((frag) => (
@@ -102,7 +102,7 @@ class Game extends Context {
   }
 
   checkCollisionWithBoundary() {
-    const head = this.snake.getHead()
+    const head = this.snake.head
     const boardSize = { x: this.ctxSize.w - this.rectSize, y: this.ctxSize.h - this.rectSize }
 
     if (head.x < -1 || head.x > boardSize.x || head.y < -1 || head.y > boardSize.y) {
@@ -114,7 +114,7 @@ class Game extends Context {
     this.snake.draw(this.dir, this.snakeAdditionalLength)
 
     if (this.isEaten()) {
-      this.snakeAdditionalLength = this.food.getType().power
+      this.snakeAdditionalLength = this.food.type.power
       this.generateFood()
     }
 

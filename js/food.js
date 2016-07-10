@@ -15,7 +15,6 @@ class Food extends Context {
       x: Math.round(Math.round(Math.random() * this.ctxSize.w) / this.rectSize) * this.rectSize,
       y: Math.round(Math.round(Math.random() * this.ctxSize.h) / this.rectSize) * this.rectSize,
     }
-    // console.log(this.props.pos)
     this.setType()
   }
 
@@ -32,11 +31,11 @@ class Food extends Context {
     this.props.type = type
   }
 
-  getType() {
+  get type() {
     return this.props.type
   }
 
-  getPosition() {
+  get position() {
     return this.props.pos
   }
 

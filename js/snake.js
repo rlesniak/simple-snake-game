@@ -19,11 +19,11 @@ class Snake extends Context {
     this.body = body
   }
 
-  getHead() {
+  get head() {
     return this.body[this.body.length - 1]
   }
 
-  getTail() {
+  get tail() {
     return this.body[0]
   }
 
@@ -32,13 +32,13 @@ class Snake extends Context {
   }
 
   checkPosition(x, y) {
-    const coords = this.getHead()
+    const coords = this.head
 
     return coords.x === x && coords.y === y
   }
 
   draw(dir, snakeAdditionalLength) {
-    const head = this.getHead()
+    const head = this.head
     let newHead = {}
 
     switch (dir) {
