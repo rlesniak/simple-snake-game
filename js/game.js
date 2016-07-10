@@ -99,9 +99,9 @@ class Game extends Context {
 
   checkCollisionWithBoundary() {
     const head = this.snake.getHead()
-    const size = this.ctxSize - this.size
+    const boardSize = { x: this.ctxSize.w - this.rectSize, y: this.ctxSize.h - this.rectSize }
 
-    if (head.x < -1 || head.x > size || head.y < -1 || head.y > size) {
+    if (head.x < -1 || head.x > boardSize.x || head.y < -1 || head.y > boardSize.y) {
       this.isOver = true
     }
   }

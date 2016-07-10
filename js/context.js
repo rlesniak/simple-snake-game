@@ -1,17 +1,17 @@
 class Context {
   constructor() {
-    this.size = 10
-    this.ctxSize = 400
+    this.rectSize = 15
+    this.ctxSize = { w: 750, h: 405 }
     this.ctx = document.getElementById('c').getContext('2d')
   }
 
   clear() {
-    this.ctx.clearRect(0, 0, 400, 400)
+    this.ctx.clearRect(0, 0, this.ctxSize.w, this.ctxSize.h)
   }
 
   drawRect(x, y, color = '#FF0000', isFilled = false) {
     this.ctx.beginPath()
-    this.ctx.rect(x, y, this.size, this.size)
+    this.ctx.rect(x, y, this.rectSize, this.rectSize)
     if (isFilled) {
       this.ctx.fillStyle = color
       this.ctx.fill()

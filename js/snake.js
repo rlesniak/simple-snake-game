@@ -7,12 +7,12 @@ class Snake extends Context {
     this.generateBody({ x: 20, y: 5 })
   }
 
-  generateBody(startPosition = null, size = 5) {
+  generateBody(startPosition = null, length = 5) {
     const body = []
-    for (let i = 0; i < size; i++) {
+    for (let i = 0; i < length; i++) {
       body.push({
-        x: (this.size * i) + startPosition.x * this.size,
-        y: startPosition.y * this.size,
+        x: (this.rectSize * i) + startPosition.x * this.rectSize,
+        y: startPosition.y * this.rectSize,
       })
     }
 
@@ -42,10 +42,10 @@ class Snake extends Context {
     let newHead = {}
 
     switch (dir) {
-      case 'l': newHead = { x: head.x - this.size, y: head.y }; break
-      case 'r': newHead = { x: head.x + this.size, y: head.y }; break
-      case 'd': newHead = { x: head.x, y: head.y + this.size }; break
-      case 'u': newHead = { x: head.x, y: head.y - this.size }; break
+      case 'l': newHead = { x: head.x - this.rectSize, y: head.y }; break
+      case 'r': newHead = { x: head.x + this.rectSize, y: head.y }; break
+      case 'd': newHead = { x: head.x, y: head.y + this.rectSize }; break
+      case 'u': newHead = { x: head.x, y: head.y - this.rectSize }; break
       default: break
     }
 
