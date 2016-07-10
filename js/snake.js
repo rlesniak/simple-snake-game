@@ -27,6 +27,10 @@ class Snake extends Context {
     return this.body[0]
   }
 
+  getLength() {
+    return this.body.length
+  }
+
   getBody() {
     return this.body
   }
