@@ -4,6 +4,8 @@ env:
 extends: airbnb
 parserOptions:
   sourceType: module
+globals:
+  _: true
 rules:
   linebreak-style:
     - error

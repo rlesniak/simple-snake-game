@@ -74,7 +74,8 @@ class Game extends Context {
   }
 
   isEaten() {
-    return this.snake.checkPosition(this.food.getPosition().x, this.food.getPosition().y)
+    const foodPos = this.food.getPosition()
+    return this.snake.checkPosition(foodPos.x, foodPos.y)
   }
 
   generateFood() {
@@ -109,7 +110,7 @@ class Game extends Context {
     this.snake.draw(this.dir, this.snakeAdditionalLength)
 
     if (this.isEaten()) {
-      this.snakeAdditionalLength = 4
+      this.snakeAdditionalLength = this.food.getType().power
       this.generateFood()
     }
 

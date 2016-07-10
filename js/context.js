@@ -9,11 +9,16 @@ class Context {
     this.ctx.clearRect(0, 0, 400, 400)
   }
 
-  drawRect(x, y, color = '#FF0000') {
+  drawRect(x, y, color = '#FF0000', isFilled = false) {
     this.ctx.beginPath()
     this.ctx.rect(x, y, this.size, this.size)
-    this.ctx.strokeStyle = color
-    this.ctx.stroke()
+    if (isFilled) {
+      this.ctx.fillStyle = color
+      this.ctx.fill()
+    } else {
+      this.ctx.strokeStyle = color
+      this.ctx.stroke()
+    }
   }
 }
 

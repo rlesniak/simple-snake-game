@@ -3,7 +3,10 @@
   "version": "1.0.0",
   "description": "",
   "main": "bundle.js",
-  "dependencies": {},
+  "dependencies": {
+    "lodash": "^4.13.1",
+    "webpack": "^1.13.1"
+  },
   "devDependencies": {
     "babel-core": "^6.10.4",
     "babel-loader": "^6.2.4",

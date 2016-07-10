@@ -1,6 +1,7 @@
 /* eslint-disable no-var */
 var path = require('path')
 var LiveReloadPlugin = require('webpack-livereload-plugin')
+var webpack = require('webpack')
 
 module.exports = {
   entry: './js/main',
@@ -30,6 +31,9 @@ module.exports = {
     ],
   },
   plugins: [
+    new webpack.ProvidePlugin({
+      _: 'lodash',
+    }),
     new LiveReloadPlugin(),
   ],
 }
