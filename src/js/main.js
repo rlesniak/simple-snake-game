@@ -1,5 +1,11 @@
 import Game from './game'
 
-const g = new Game()
+const callbacks = {
+  onScoreChange: (value) => {
+    console.log(value);
+  }
+}
+
+const g = new Game(callbacks)
 g.init()
 g.start()

@@ -4,12 +4,13 @@ import Food from './food'
 import { game, gameOver } from './ui'
 
 class Game extends Context {
-  constructor() {
+  constructor(apiCallbacks = {}) {
     super()
     this.snake = new Snake()
     this.food = new Food()
+    this.api = new Api(apiCallbacks)
 
-    game().updateScore(this.snake.getLength())
+    this.api.score = 0
 
     this.interval = null
     this.dir = 'r'
@@ -19,7 +20,6 @@ class Game extends Context {
   }
 
   restart() {
-    gameOver().hide()
     clearInterval(this.interval)
 
     this.dir = 'r'
@@ -35,7 +35,7 @@ class Game extends Context {
 
     this.interval = setInterval(() => {
       if (this.isOver) {
-        gameOver().show(this.snake.getLength())
+        this.api.gameOver()
         return
       }
       if (this.isPaused) {
@@ -117,7 +117,7 @@ class Game extends Context {
       this.snakeAdditionalLength += this.food.type.power
       this.generateFood()
 
-      game().updateScore(this.snake.getLength() + this.food.type.power)
+      this.api.score = this.snake.getLength() + this.food.type.power
     }
 
     this.snake.draw(this.dir, this.snakeAdditionalLength)
