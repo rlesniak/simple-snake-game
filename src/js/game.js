@@ -1,15 +1,16 @@
 import Context from './context'
 import Snake from './snake'
 import Food from './food'
-import { game, gameOver } from './ui'
+import Api from './api'
 
 class Game extends Context {
-  constructor() {
+  constructor(options = {}) {
     super()
     this.snake = new Snake()
     this.food = new Food()
+    this.api = new Api(options.events)
 
-    game().updateScore(this.snake.getLength())
+    this.api.score = 0
 
     this.interval = null
     this.dir = 'r'
@@ -19,7 +20,7 @@ class Game extends Context {
   }
 
   restart() {
-    gameOver().hide()
+    this.api.onGameStart()
     clearInterval(this.interval)
 
     this.dir = 'r'
@@ -30,35 +31,46 @@ class Game extends Context {
     this.start()
   }
 
+  init() {
+    document.addEventListener('keydown', this.initKeys.bind(this))
+  }
+
   start() {
+    this.api.score = 0
     this.food.generate()
 
-    this.interval = setInterval(() => {
-      if (this.isOver) {
-        gameOver().show(this.snake.getLength())
-        return
-      }
-      if (this.isPaused) {
-        clearInterval(this.interval)
-      }
+    this.startInterval()
+  }
 
-      this.clear()
-      this.draw()
+  startInterval() {
+    this.interval = setInterval(() => {
+      this.gameLoop()
     }, 100)
+  }
+
+  gameLoop() {
+    if (this.isPaused || this.isOver) {
+      clearInterval(this.interval)
+    }
+
+    if (this.isOver) {
+      this.api.onGameOver()
+      return
+    }
+
+    this.clear()
+    this.draw()
   }
 
   togglePause() {
     if (this.isPaused) {
       this.isPaused = false
-      this.start()
+      this.startInterval()
     } else {
       this.isPaused = true
+      this.api.onGamePause()
       clearInterval(this.interval)
     }
-  }
-
-  init() {
-    document.addEventListener('keydown', this.initKeys.bind(this))
   }
 
   initKeys(e) {
@@ -117,7 +129,7 @@ class Game extends Context {
       this.snakeAdditionalLength += this.food.type.power
       this.generateFood()
 
-      game().updateScore(this.snake.getLength() + this.food.type.power)
+      this.api.score = this.snake.getLength() + this.food.type.power
     }
 
     this.snake.draw(this.dir, this.snakeAdditionalLength)
