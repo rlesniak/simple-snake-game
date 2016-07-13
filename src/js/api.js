@@ -4,16 +4,21 @@ class Api {
       score: 0,
     }
 
+    this.onScoreChange = () => {}
+    this.onGameOver = () => {}
+    this.onGameStart = () => {}
+    this.onGamePause = () => {}
+
     if (_.isObject(callbacks)) {
       this.setCallbacks(callbacks)
     }
   }
 
   setCallbacks(callbacks = {}) {
-    this.onScoreChange = callbacks.onScoreChange
-    this.onGameOver = callbacks.onGameOver
-    this.onGameStart = callbacks.onGameStart
-    this.onGamePause = callbacks.onGamePause
+    this.onScoreChange = callbacks.onScoreChange || (() => {})
+    this.onGameOver = callbacks.onGameOver || (() => {})
+    this.onGameStart = callbacks.onGameStart || (() => {})
+    this.onGamePause = callbacks.onGamePause || (() => {})
   }
 
   set score(value) {
@@ -21,24 +26,6 @@ class Api {
 
     if (this.onScoreChange) {
       this.onScoreChange.call(null, value)
-    }
-  }
-
-  gameOver() {
-    if (this.onGameOver) {
-      this.onGameOver.call(null, this.data.score)
-    }
-  }
-
-  gameStart() {
-    if (this.onGameStart) {
-      this.onGameStart.call(null)
-    }
-  }
-
-  gamePause() {
-    if (this.onGamePause) {
-      this.onGamePause.call(null)
     }
   }
 }

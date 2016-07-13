@@ -20,7 +20,7 @@ class Game extends Context {
   }
 
   restart() {
-    this.api.gameStart()
+    this.api.onGameStart()
     clearInterval(this.interval)
 
     this.dir = 'r'
@@ -54,7 +54,7 @@ class Game extends Context {
     }
 
     if (this.isOver) {
-      this.api.gameOver()
+      this.api.onGameOver()
       return
     }
 

@@ -5,14 +5,14 @@ const $stats = $('.board-stats')
 
 const options = {
   events: {
-    onScoreChange: (score) => {
+    onScoreChange(score) {
       $stats.find('#score').text(score)
     },
-    onGameOver: (score) => {
-      $overlay.find('#score').text(score)
+    onGameOver() {
+      $overlay.find('#score').text(this.data.score)
       $overlay.show()
     },
-    onGameStart: () => {
+    onGameStart() {
       $overlay.hide()
     },
   },
