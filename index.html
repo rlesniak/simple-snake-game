@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Snake</title>
+  <link rel="stylesheet" href="main.css">
+</head>
+<body>
+  <div class="board">
+    <canvas id="c" width="750" height="405" style="border:1px solid #000000;"></canvas>
+    <div class="board-control">
+      <table class="game-over-overlay">
+        <tr>
+          <td>
+            <h1>Game Over</h1>
+            <h2>Your final length was: <span id="score"></span></h2>
+            <h3>Press R to restart</h3>
+          </td>
+        </tr>
+      </table>
+    </div>
+    <div class="board-stats">
+      Score: <span id="score"></span>
+    </div>
+  </div>
+  <script type="text/javascript" src="/js/bundle.js" charset="utf-8"></script>
+</body>
+</html>
