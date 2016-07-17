@@ -43,7 +43,7 @@ class Snake extends Context {
 
   draw(dir, snakeAdditionalLength) {
     const head = this.head
-    let newHead = {}
+    let newHead = { x: head.x + this.rectSize, y: head.y }
 
     switch (dir) {
       case 'l': newHead = { x: head.x - this.rectSize, y: head.y }; break

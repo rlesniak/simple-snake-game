@@ -5,7 +5,7 @@ export default config => {
     ...base,
     autoWatch: false,
     singleRun: true,
-    reporters: ['dots'],
+    reporters: ['dots', 'coverage'],
   });
 
   return config;
