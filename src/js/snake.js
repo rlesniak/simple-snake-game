@@ -7,7 +7,7 @@ class Snake extends Context {
     this.generateBody({ x: 20, y: 5 })
   }
 
-  generateBody(startPosition = null, length = 5) {
+  generateBody(startPosition = { x: 0, y: 0 }, length = 5) {
     const body = []
     for (let i = 0; i < length; i++) {
       body.push({
