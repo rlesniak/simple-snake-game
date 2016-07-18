@@ -12,8 +12,8 @@ class Game extends Context {
 
     this.api.score = 0
     this.eatCounter = 0
+    this.snakeSpeed = 100
 
-    this.interval = null
     this.dir = 'r'
     this.isOver = false
     this.snakeAdditionalLength = 0
@@ -22,7 +22,6 @@ class Game extends Context {
 
   restart() {
     this.api.onGameStart()
-    clearInterval(this.interval)
 
     this.dir = 'r'
     this.snake = new Snake()
@@ -38,20 +37,18 @@ class Game extends Context {
 
   start() {
     this.api.score = 0
+    this.snakeSpeed = 100
     this.food.generate()
 
-    this.startInterval()
-  }
-
-  startInterval() {
-    this.interval = setInterval(() => {
-      this.gameLoop()
-    }, 100)
+    this.gameLoop()
   }
 
   gameLoop() {
-    if (this.isPaused || this.isOver) {
-      clearInterval(this.interval)
+    if (this.isPaused) {
+      setTimeout(() => {
+        this.gameLoop()
+      }, this.snakeSpeed)
+      return
     }
 
     if (this.isOver) {
@@ -61,16 +58,19 @@ class Game extends Context {
 
     this.clear()
     this.draw()
+
+    setTimeout(() => {
+      this.gameLoop()
+    }, this.snakeSpeed)
   }
 
   togglePause() {
     if (this.isPaused) {
       this.isPaused = false
-      this.startInterval()
+      this.gameLoop()
     } else {
       this.isPaused = true
       this.api.onGamePause()
-      clearInterval(this.interval)
     }
   }
 
@@ -129,6 +129,7 @@ class Game extends Context {
     if (this.isEaten()) {
       this.snakeAdditionalLength += this.food.type.power
       this.generateFood()
+      this.snakeSpeed -= 5
 
       this.api.score = this.snake.getLength() + this.food.type.power
     }
