@@ -11,6 +11,7 @@ class Game extends Context {
     this.api = new Api(options.events)
 
     this.api.score = 0
+    this.eatCounter = 0
 
     this.interval = null
     this.dir = 'r'

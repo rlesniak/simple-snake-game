@@ -1,11 +1,12 @@
 import Context from './context'
-import FOOD_TYPES from './const/food_types.js'
+import FOOD_TYPES from './const/food_types'
+import { numberBetween } from './helpers'
 
 class Food extends Context {
   constructor() {
     super()
     this.props = {
-      type: FOOD_TYPES.basic,
+      type: FOOD_TYPES[0],
       pos: { x: 0, y: 0 },
     }
   }
@@ -25,17 +26,23 @@ class Food extends Context {
       x: this.generateRandomPoint(this.ctxSize.w),
       y: this.generateRandomPoint(this.ctxSize.h),
     }
-    this.setType()
+    this.generateType()
   }
 
   // TODO: More accurate selecting type
-  setType() {
+  generateType() {
     let type = null
+    let c = 0
 
     if (_.random(0, 100) > 70) {
-      type = _.sample(FOOD_TYPES)
+      c = _.random(0, 90)
+      const food = _.find(FOOD_TYPES, (v) => (
+        numberBetween(c, v.generatingRatio[0], v.generatingRatio[1])
+      ))
+
+      type = food
     } else {
-      type = FOOD_TYPES.basic
+      type = FOOD_TYPES[0]
     }
 
     this.props.type = type
