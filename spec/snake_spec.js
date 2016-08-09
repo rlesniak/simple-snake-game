@@ -4,10 +4,12 @@ describe('Snake', () => {
   let snake
 
   beforeAll(() => {
+    snake = new Snake()
+    const baseSnakeLength = 5
+
     document.body.insertAdjacentHTML('afterbegin',
       '<canvas id="c" width="750" height="405" style="border:1px solid #000000;"></canvas>')
-    snake = new Snake()
-    snake.generateBody({ x: 5, y: 2 }, 5)
+    snake.generateBody({ x: 5, y: 2 }, baseSnakeLength)
   })
 
   describe('#generateBody', () => {
@@ -40,35 +42,39 @@ describe('Snake', () => {
 
   describe('#draw', () => {
     describe('when normal move', () => {
+      const additionalLength = 0
+
       it('moves to the right', () => {
-        snake.draw('r', 0)
+        snake.draw('r', additionalLength)
         expect(snake.body[4]).toEqual({ x: 150, y: 30 })
       })
 
       it('moves to the down', () => {
-        snake.draw('d', 0)
+        snake.draw('d', additionalLength)
         expect(snake.body[4]).toEqual({ x: 150, y: 45 })
       })
 
       it('moves to the left', () => {
-        snake.draw('l', 0)
+        snake.draw('l', additionalLength)
         expect(snake.body[4]).toEqual({ x: 135, y: 45 })
       })
 
       it('moves to the up', () => {
-        snake.draw('u', 0)
+        snake.draw('u', additionalLength)
         expect(snake.body[4]).toEqual({ x: 135, y: 30 })
       })
 
       it('moves still to the up', () => {
-        snake.draw('ds', 0)
+        snake.draw('ds', additionalLength)
         expect(snake.body[4]).toEqual({ x: 150, y: 30 })
       })
     })
 
     describe('when eat move', () => {
+      const additionalLength = 2
+
       it('moves to the right', () => {
-        snake.draw('r', 2)
+        snake.draw('r', additionalLength)
         expect(snake.body.length).toEqual(6)
       })
     })

@@ -4,28 +4,28 @@ const FOOD_TYPES = [
     color: '#9999FF',
     isFilled: true,
     generatingRatio: [0, 50],
-    lastOccur: 0,
+    velocityMultiplier: 1,
   },
   {
     power: 4,
     color: '#FF0000',
     isFilled: true,
     generatingRatio: [51, 68],
-    lastOccur: 0,
+    velocityMultiplier: 1.2,
   },
   {
     power: 5,
     color: '#999900',
     isFilled: false,
     generatingRatio: [69, 79],
-    lastOccur: 0,
+    velocityMultiplier: 1.3,
   },
   {
     power: 10,
     color: '#FF00FF',
     isFilled: true,
-    generatingRatio: [80, 90],
-    lastOccur: 0,
+    generatingRatio: [80, 85],
+    velocityMultiplier: 1.5,
   },
 ]
 

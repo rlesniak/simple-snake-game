@@ -28,14 +28,14 @@ class Game extends Context {
     this.food = new Food()
     this.isOver = false
 
-    this.start()
+    this.startGame()
   }
 
   init() {
     document.addEventListener('keydown', this.initKeys.bind(this))
   }
 
-  start() {
+  startGame() {
     this.api.score = 0
     this.snakeSpeed = 100
     this.food.generate()
@@ -107,11 +107,13 @@ class Game extends Context {
     const head = this.snake.head
     const body = this.snake.getBody()
 
-    const isCollision = !!body.slice(0, -1).filter((frag) => (
+    const bodyWithoutHead = body.slice(0, -1)
+
+    const isHeadOnBody = !!bodyWithoutHead.filter((frag) => (
       frag.x === head.x && frag.y === head.y
     )).length
 
-    if (isCollision) {
+    if (isHeadOnBody) {
       this.isOver = true
     }
   }
@@ -129,7 +131,7 @@ class Game extends Context {
     if (this.isEaten()) {
       this.snakeAdditionalLength += this.food.type.power
       this.generateFood()
-      this.snakeSpeed -= 5
+      this.snakeSpeed -= (2 * this.food.type.velocityMultiplier)
 
       this.api.score = this.snake.getLength() + this.food.type.power
     }
